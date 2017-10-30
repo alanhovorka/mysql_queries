@@ -1,5 +1,13 @@
-Collection of queries that provide a personal reference to different things to do in MySQL and pandas
+Collection of data queries for stories. Written in MySQL and pandas. Pandas => Jupyter Notebook
 =================
 
-To do: 
-Identify helpful snippets
+Firefighters:
+Unfinished
+
+Vets:
+Looking at Census, BLS and VA data to ascertain Florida's position in veterans issues.
+	Census data:
+		ACS Veteran Status 2005-2016 one-year estimates, state level data. 
+	BLS data:
+	VA data:
+
