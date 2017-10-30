@@ -6,8 +6,11 @@ Unfinished
 
 Vets:
 Looking at Census, BLS and VA data to ascertain Florida's position in veterans issues.
+	
 	Census data:
 		ACS Veteran Status 2005-2016 one-year estimates, state level data. 
+	
 	BLS data:
+	
 	VA data:
 
