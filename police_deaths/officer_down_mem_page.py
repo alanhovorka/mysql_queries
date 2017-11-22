@@ -1,4 +1,6 @@
-
+from bs4 import BeautifulSoup
+import os
+from glob import glob
 from time import sleep
 from pprint import pprint as pp
 import csv
@@ -35,38 +37,61 @@ baseurl = ['https://www.odmp.org/search?from=1791&to=1900&o=','https://www.odmp.
 #The data is contained in <td valign =  "top" ... >
 #Inside td tag with valign value "top", the data is stored as <p> tags separated by <br>
 
-
-# We'll want to use sleept(INTEGER) so we don't DDOS the the website
-
-# Create list of multiples of 25 that we can concate with baseurl
+# We'll want to use sleep(INTEGER) so we don't DDOS the the website
 
 # mulp25 = [x for x in range(0,9351,25)]
 
-# pp(mulp25)
-# pp(len(mulp25))
+#function that runs a For loop to generate the URLs to scrape. Save this to a JSON file for easier scraping later
+def urllist():
+	for url in baseurl:
+		if url == 'https://www.odmp.org/search?from=1791&to=1900&o=':
+			for w in range(0, 2051, 25):
+				newurl = url + str(w)
+				urls.append(newurl)
+		elif url == 'https://www.odmp.org/search?from=1901&to=1950&o=':
+			for x in range(0, 9351, 25):
+				newurl = url + str(x)
+				urls.append(newurl)
+		elif url == 'https://www.odmp.org/search?from=1951&to=2000&o=':
+			for y in range(0, 8975, 25):
+				newurl = url + str(y)
+				urls.append(newurl)
+		elif url == 'https://www.odmp.org/search?from=2001&to=2017&o=':
+			for z in range(0, 2950, 25):
+				newurl = url + str(z)
+				urls.append(newurl)
+		else:
+			pass
 
-# eins = [j + '.json' for j in small_eins]
+# function to write the urls list variable to a local json file for scraping. Run this to save the data locally for posterity. 
+def urls_to_json(url_list):
+	with open('data.json', 'w') as outfile:
+		json.dump(url_list, outfile)
 
-#For loop to generate the URLs to scrape. Save this to a JSON file for easier scraping later
-for url in baseurl:
-	if url == 'https://www.odmp.org/search?from=1791&to=1900&o=':
-		for w in range(0, 2051, 25):
-			newurl = url + str(w)
-			urls.append(newurl)
-	elif url == 'https://www.odmp.org/search?from=1901&to=1950&o=':
-		for x in range(0, 9351, 25):
-			newurl = url + str(x)
-			urls.append(newurl)
-	elif url == 'https://www.odmp.org/search?from=1951&to=2000&o=':
-		for y in range(0, 8975, 25):
-			newurl = url + str(y)
-			urls.append(newurl)
-	elif url == 'https://www.odmp.org/search?from=2001&to=2017&o=':
-		for z in range(0, 2950, 25):
-			newurl = url + str(z)
-			urls.append(newurl)
-	else:
-		pass
+# function to download html of search pages to local directory, also sets the naming
 
-pp(urls)
-pp(len(urls))
+def run(url):
+	r = requests.get(url)
+	# Declare naming convention. In this case, it will be named using the url contents after the '?'
+	name = url.split('/')[-1].split('?')[-1]
+	with open('search_results/' + name, 'w') as file:
+		file.write(r.text)
+
+
+#Create list of URLs to scrape
+urllist()
+
+# pp(urls)
+# pp(len(urls))
+#This should return a list of the urls to scrape. Their should be 935 urls to scrape. Each url will have about 25 data entries to scrape, with about four or five possible columns of data.
+#This comes out to about 23,000 police deaths, may include K9 units.
+# When accounting for columns, the final scrape should produce about one million cells (23000 rows * 4 OR 23000 * 5)
+
+#Run the function that saves the urls to a local json file
+# urls_to_json(urls)
+
+#Run download function, use sleep so we don't get blocked
+for url in urls:
+	run(url)
+	print('Saved page')
+	sleep(10)
