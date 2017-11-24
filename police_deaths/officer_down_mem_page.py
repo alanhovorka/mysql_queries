@@ -45,19 +45,19 @@ baseurl = ['https://www.odmp.org/search?from=1791&to=1900&o=','https://www.odmp.
 def urllist():
 	for url in baseurl:
 		if url == 'https://www.odmp.org/search?from=1791&to=1900&o=':
-			for w in range(0, 2051, 25):
+			for w in range(0, 2100, 25):
 				newurl = url + str(w)
 				urls.append(newurl)
 		elif url == 'https://www.odmp.org/search?from=1901&to=1950&o=':
-			for x in range(0, 9351, 25):
+			for x in range(0, 9400, 25):
 				newurl = url + str(x)
 				urls.append(newurl)
 		elif url == 'https://www.odmp.org/search?from=1951&to=2000&o=':
-			for y in range(0, 8975, 25):
+			for y in range(0, 9000, 25):
 				newurl = url + str(y)
 				urls.append(newurl)
 		elif url == 'https://www.odmp.org/search?from=2001&to=2017&o=':
-			for z in range(0, 2950, 25):
+			for z in range(0, 3000, 25):
 				newurl = url + str(z)
 				urls.append(newurl)
 		else:
@@ -73,9 +73,12 @@ def urls_to_json(url_list):
 def run(url):
 	r = requests.get(url)
 	# Declare naming convention. In this case, it will be named using the url contents after the '?'
-	name = url.split('/')[-1].split('?')[-1]
-	with open('search_results/' + name, 'w') as file:
+	name = url.split('/')[-1].split('?')[-1] + '.html'
+	with open('search_results/' + name, 'w', encoding='utf8') as file:
+		# If you don't include the encoding parameter, you'll run into an error eventually
 		file.write(r.text)
+		print('wrote file: ' + str(name))
+
 
 
 #Create list of URLs to scrape
@@ -86,12 +89,37 @@ urllist()
 #This should return a list of the urls to scrape. Their should be 935 urls to scrape. Each url will have about 25 data entries to scrape, with about four or five possible columns of data.
 #This comes out to about 23,000 police deaths, may include K9 units.
 # When accounting for columns, the final scrape should produce about one million cells (23000 rows * 4 OR 23000 * 5)
+# pp() = pretty printing library to make print statements readable for large amounts of data
+
 
 #Run the function that saves the urls to a local json file
 # urls_to_json(urls)
 
-#Run download function, use sleep so we don't get blocked
-for url in urls:
+#Call 'run' function, use sleep so we don't get blocked
+# for url in urls:
+# 	run(url)
+# 	print('Saved page')
+# 	sleep(4)
+
+#Call 'run' function for specific URL index range, useful if an error is thrown during your scraping. 
+for url in urls[817:840]:
 	run(url)
 	print('Saved page')
-	sleep(10)
+	sleep(4)
+
+for url in urls[458:470]:
+	run(url)
+	print('Saved page')
+	sleep(4)
+
+for url in urls[82:101]:
+	run(url)
+	print('Saved page')
+	sleep(4)
+
+# If your code throws an error during the scraping, search for the last file written (it'll probably be incomplete)
+# Grab the name of that incomplete file, add the full URL, run this print command to get the index position of where you left off. This one will return 462
+# With index in hand, call the 'run' function again and start from url position 462, give the function a range
+# print(urls.index('https://www.odmp.org/search?from=1951&to=2000&o=8925'))
+# print(urls.index('https://www.odmp.org/search?from=1901&to=1950&o=9350'))
+# print(urls.index('https://www.odmp.org/search?from=1791&to=1900&o=2050'))
