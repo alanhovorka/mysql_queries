@@ -1,0 +1,99 @@
+parole
+
+Per our conversation, I’ve briefly outlined the parole process. Each time a parole hearing is held, a Parole Commission Action Form (DOC-1208) is completed by a commissioner . The chair of the Parole Commission must approve or deny recommendations for parole or deferrals greater than 12 months. If the chair of the Parole Commission determines that an inmate should receive a parole grant, a parole order is completed (DOC-1201).
+
+
+21 different parole entries in the final_action column
+
+====================================================
+7-15-17
+====================================================
+
+Obtained the list of different final_action descriptions. Manually categorized them into parole grant/not grant. Not sure want release means. It's easy to go back in and add or take away a term for a list. Please take a look and see if that's needed. 
+
+List from 1208 data
+Defer (for # of months)
+Defer to MR
+Set Next Review Date for PMR
+Parole Grant   
+Defer to MR - PMR
+Grant Parole
+Defer to MAX Disch. Date - PMR
+No Action Taken
+Release on MR for PMR Offense
+Withdrew From Consideration
+Defer to MAX Discharge Date
+Approved Release - PMR
+Parole to Interstate Compact
+Parole Grant to TIS
+Parole to Detainer
+Release to Interstate Compact
+Release to TIS
+Compassionate Release Parole G
+Release to Detainer
+Unknown
+Approve Office Grant to Detain
+
+1208 grant term list:
+Parole Grant   
+Grant Parole
+Parole Grant to TIS
+Compassionate Release Parole G
+
+List from 1201 data
+Parole Grant   
+Grant Parole
+Release on MR for PMR Offense
+Parole to Interstate Compact
+Parole Grant to TIS
+Parole to Detainer
+Release to TIS
+Release to Interstate Compact
+Release to Detainer
+Compassionate Release Parole G
+Approve Office Grant to Detain
+
+1201 grant list
+Parole Grant   
+Grant Parole
+Parole Grant to TIS
+Compassionate Release Parole G
+
+
+1208_grant_list_results
+other, non-grants	11176
+parole grants	785
+
+1201_grant_list_results
+other, non-grants	217
+parole grants	785
+
+
+Inmates with multiple 1208 parole grants (there's only one)
+doc_number	name	Date
+461305	DAVELER, ROBERT	10/28/2014	Parole Chair Only Review Held	File Review	Parole Grant   
+461305	DAVELER, ROBERT	9/22/2016	Parole Chair Only Review Held	File Review	Parole Grant  
+Johnson, Christopher has multiple entries
+Parole grant/grant parole in 2012 and 2016 
+
+CSV files:
+parole_grant_list_1208.csv
+List of 1208's with parole grant. I used the above terms to select what grant terms are
+
+1208_with_1201.csv
+Merged file that shows which 1208's have 1201's. About 1,000 in the 1201, 750ish have 1208's. Fields marked null mean there was not a corresponding 1208 form for that person on the 1201 list. 
+
+
+It looks like they copy-pasted a filtered version of the1208 outcomes into a new sheet and labeled it 12. The records are identical. It makes it look like everyone that received a parole grant got it approved. 
+
+It makes it look like everyone that received a parole grant got it approved and they sprinkled in some nongrants to make it look like the person that does 1201's is following the board's lead.
+
+grab the 1201 for a couple of random people and look to see that the actual date matches
+
+Also, I feel like the final action for 1201 would be different than the 1208, where the 1201 would have slihtly different language. 
+
+In five year 785 had parole recommended, 1201 indicates they all got it. the rest are non-parole stuff
+
+Ask for a list of defintions for their outcome columns, if they have a legend, key or handbook
+
+Also, who are these people? Race? gender? home town?
